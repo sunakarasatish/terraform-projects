@@ -208,7 +208,7 @@ When the above setup is done, ArgoCD will be deployed. The following is detailed
 
         `kubectl get ingress -n argocd`
 
-    The full file can be found here `cicd/modules/argocd/templates/values.yaml`. # Add the github link here. 
+    The full file can be found here [`cicd/modules/argocd/templates/values.yaml`](https://github.com/Skanyi/terraform-projects/blob/main/cicd/modules/argocd/templates/values.yaml).  
 
     Get the `admin` user password using the following command: 
 
@@ -255,7 +255,7 @@ When the above setup is done, ArgoCD will be deployed. The following is detailed
 
        - Create a private repostory on GitHub and have a sample application duplicated there. 
 
-       - Connect the GitHub repository with ArgoCD using any method described on [Private Repositories] (https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/).
+       - Connect the GitHub repository with ArgoCD using any method described on [Private Repositories](https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/).
 
        - Create the argocd application using the following YAML file. 
 
@@ -289,12 +289,12 @@ When the above setup is done, ArgoCD will be deployed. The following is detailed
                - PruneLast=true
        ```
 
-The above YAML files can be found here `cicd/modules/argocd/templates/values.yaml`. # Add the github link here. 
+The above YAML files can be found here [`applications/argocd-apps`](https://github.com/Skanyi/terraform-projects/tree/main/applications/argocd-apps). 
 
 8. Change the image of the deployment and observe if argocd deploy new pods for the deployment.  
 
 
-![ Setup ArgoCD in AWS EKS Cluster Using Terraform and HELM ](assets/ArgCd-Applications.png "Deploy ArgoCD to AWS EKS")
+![ Setup ArgoCD in AWS EKS Cluster Using Terraform and HELM ](assets/ArgoCd-Applications.png " Deploy ArgoCD to AWS EKS")
 
 
 ## Cleanup the Resources we Created

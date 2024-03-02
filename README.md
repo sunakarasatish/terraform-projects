@@ -9,9 +9,11 @@ Projects:
 
 3. [Deploy AWS Managed Prometheus (AMP) and AWS Managed Grafana (AMG) With Terraform for scalable observibility on EKS Cluster Created in Project 1](https://github.com/Skanyi/terraform-projects/tree/main/monitoring) 
 
+4. [Deploying ArgoCD on EKS with Terraform and Helm on EKS Cluster Created in Project 1](https://github.com/Skanyi/terraform-projects/tree/main/cicd) 
+
 
 ### Add monitoring to the EKS Cluster
 
-1. Deploy Argo CD to EKS cluster for Continous delivery of the applications. 
+1. Deploy Karpenter to manage Scaling of nodes. 
 
 If there is any tooling or project that you would like to see integrated with EKS cluster, create an issue and if I have time i will add it to the project. 
