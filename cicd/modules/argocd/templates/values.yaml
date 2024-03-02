@@ -1,0 +1,73 @@
+## Argo Configs
+configs:
+  # Argo CD configuration parameters
+  ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cmd-params-cm.yaml
+  params:
+    ## Server properties
+    # -- Run server without TLS
+    server.insecure: true
+
+## Server
+server:
+  # -- The number of server pods to run
+  replicas: 1
+
+  ## Argo CD server Horizontal Pod Autoscaler
+  autoscaling:
+    # -- Enable Horizontal Pod Autoscaler ([HPA]) for the Argo CD server
+    enabled: false
+    # -- Minimum number of replicas for the Argo CD server [HPA]
+    minReplicas: 1
+    # -- Maximum number of replicas for the Argo CD server [HPA]
+    maxReplicas: 5
+    # -- Average CPU utilization percentage for the Argo CD server [HPA]
+    targetCPUUtilizationPercentage: 50
+    # -- Average memory utilization percentage for the Argo CD server [HPA]
+    targetMemoryUtilizationPercentage: 50
+
+  ingress:
+    # -- Enable an ingress resource for the Argo CD server
+    enabled: true
+    # -- Additional ingress annotations
+    annotations: {
+      alb.ingress.kubernetes.io/scheme: internet-facing,
+      alb.ingress.kubernetes.io/target-type: ip,
+      alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:replace", # Replace this with your certificate arn
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]',
+      alb.ingress.kubernetes.io/ssl-redirect: '443'
+    }
+    # -- Additional ingress labels
+    labels: {}
+    # -- Defines which ingress controller will implement the resource
+    ingressClassName: "alb"
+
+    # -- List of ingress hosts
+    ## Argo Ingress.
+    ## Hostnames must be provided if Ingress is enabled.
+    ## Secrets must be manually created in the namespace
+    hosts:
+      - argocd.example.com # Relace this with your subdomain
+
+    # -- List of ingress paths
+    paths:
+      - /
+    # -- Ingress path type. One of `Exact`, `Prefix` or `ImplementationSpecific`
+    pathType: Prefix
+    # -- Additional ingress paths
+    extraPaths: []
+      # - path: /*
+      #   pathType: Prefix
+      #   backend:
+      #     service:
+      #       name: ssl-redirect
+      #       port:
+      #         name: use-annotation
+
+    # -- Ingress TLS configuration
+    tls: []
+      # - secretName: your-certificate-name
+      #   hosts:
+      #     - argocd.example.com
+
+    # -- Uses `server.service.servicePortHttps` instead `server.service.servicePortHttp`
+    https: false
